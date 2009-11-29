@@ -1,28 +1,25 @@
 //
-//  MovieViewController.m
+//  MovieEditorViewController.m
 //  Movie
 //
-//  Created by Steve Baker on 11/28/09.
-//  Copyright Beepscore LLC 2009. All rights reserved.
+//  Created by Steve Baker on 11/29/09.
+//  Copyright 2009 Beepscore LLC. All rights reserved.
 //
 
-#import "MovieViewController.h"
-#import "Movie.h"
 #import "MovieEditorViewController.h"
+#import "Movie.h"
 
-@implementation MovieViewController
+@implementation MovieEditorViewController
 
 #pragma mark -
 #pragma mark properties
 @synthesize movie;
-@synthesize titleLabel;
-@synthesize boxOfficeGrossLabel;
-@synthesize summaryLabel;
-@synthesize editingViewController;
-
+@synthesize titleField;
+@synthesize boxOfficeGrossField;
+@synthesize summaryField;
 
 /*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
+ // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         // Custom initialization
@@ -37,24 +34,45 @@
 }
 */
 
+/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-    Movie *newMovie = [[[Movie alloc] initWithTitle:@"Iron Man" 
-                                     boxOfficeGross:[NSNumber numberWithFloat:650000000.00] 
-                                            summary:@"Smart guy makes cool armor"] autorelease];
-    self.movie = newMovie;
 }
+*/
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.titleLabel.text = self.movie.title;
+    self.titleField.text = self.movie.title;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    self.boxOfficeGrossLabel.text = 
-      [formatter stringFromNumber:self.movie.boxOfficeGross];
+    self.boxOfficeGrossField.text = 
+    [formatter stringFromNumber:self.movie.boxOfficeGross];
     [formatter release];
-    self.summaryLabel.text = self.movie.summary;
+    self.summaryField.text = self.movie.summary;
+}
+
+- (IBAction)done {
+    [[self parentViewController] dismissModalViewControllerAnimated:YES];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField == self.titleField) {
+        self.movie.title = self.titleField.text;
+    } else if (textField == self.boxOfficeGrossField) {
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+        self.movie.boxOfficeGross = 
+          [formatter numberFromString:self.boxOfficeGrossField.text];
+        [formatter release];
+    } else if (textField == self.summaryField) {
+        self.movie.summary = self.summaryField.text;
+    }
 }
 
 /*
@@ -77,15 +95,10 @@
 	// e.g. self.myOutlet = nil;
 }
 
--(IBAction)edit {
-    NSLog(@"edit method invoked");
-    self.editingViewController.movie = self.movie;
-    [self presentModalViewController:self.editingViewController animated:YES];
-}
-
 
 - (void)dealloc {
     [super dealloc];
 }
+
 
 @end
