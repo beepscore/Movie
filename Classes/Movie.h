@@ -21,7 +21,9 @@
 @property(nonatomic,copy)NSString *summary;
 
 // designated initializer
-- (id)initWithTitle:(NSString*)aTitle boxOfficeGross:(NSNumber*)aBoxOfficeGross summary:(NSString*)aSummary;
+- (id)initWithTitle:(NSString*)aTitle
+     boxOfficeGross:(NSNumber*)aBoxOfficeGross 
+            summary:(NSString*)aSummary;
 
 - (id)initWithExampleValues;
 

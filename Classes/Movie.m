@@ -31,12 +31,14 @@
 - (id)initWithExampleValues {
     // call designated initializer
     [self initWithTitle:@"Plan 9 from Outer Space"
-    boxOfficeGross:[NSNumber numberWithFloat:97.53]
-                    summary:@"Some think it's one of the worst movies ever made!"];
+         boxOfficeGross:[NSNumber numberWithFloat:97.53]
+                summary:@"Some think it's one of the worst movies ever made!"];
     return self;
 }
 
-- (id)initWithTitle:(NSString*)aTitle boxOfficeGross:(NSNumber*)aBoxOfficeGross summary:(NSString*)aSummary {
+- (id)initWithTitle:(NSString*)aTitle 
+     boxOfficeGross:(NSNumber*)aBoxOfficeGross 
+            summary:(NSString*)aSummary {
     if (self = [super init]) {
         [self setTitle:aTitle];
         [self setBoxOfficeGross:aBoxOfficeGross];
@@ -46,11 +48,6 @@
 }
 
 
-
-
-//=========================================================== 
-// dealloc
-//=========================================================== 
 - (void)dealloc {
     self.title = nil;
     self.boxOfficeGross = nil;

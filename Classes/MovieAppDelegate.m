@@ -14,7 +14,11 @@
 @synthesize window;
 @synthesize viewController;
 
-
+// MovieAppDelegate implements the <UIApplicationDelegate> protocol,
+// and is the UIApplication object's delegate.
+// When the UIApplication object finishes launching, it calls
+// MovieAppDelegate -applicationDidFinishLaunching:
+// Ref Dudney sec 3.6, 4.5
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     
     // Override point for customization after app launch    
