@@ -97,6 +97,11 @@
 
 
 - (void)dealloc {
+    self.movie = nil;
+    self.titleField = nil;
+    self.boxOfficeGrossField = nil;
+    self.summaryField = nil;
+    
     [super dealloc];
 }
 

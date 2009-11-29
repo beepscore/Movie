@@ -83,8 +83,13 @@
     [self presentModalViewController:self.editingViewController animated:YES];
 }
 
-
 - (void)dealloc {
+    self.movie = nil;
+    self.titleLabel = nil;
+    self.boxOfficeGrossLabel = nil;
+    self.summaryLabel = nil;
+    self.editingViewController = nil;
+    
     [super dealloc];
 }
 
